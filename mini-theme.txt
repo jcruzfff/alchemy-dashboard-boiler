@@ -1,0 +1,352 @@
+/*
+=============================================================================
+MINI DESIGN SYSTEM - FOUNDATION THEME
+=============================================================================
+A streamlined design system with actual hex values for immediate use.
+Copy-paste ready for any project.
+
+Contains: Colors, Typography, Spacing, Borders, Shadows, Animations
+=============================================================================
+*/
+
+@import "tailwindcss" prefix(ui);
+
+/* =============================================================================
+   1. CORE COLOR PALETTE (Actual Hex Values)
+============================================================================= */
+
+@theme {
+  /* Base Colors */
+  --color-white: #ffffff;
+  --color-black: #000000;
+  
+  /* Gray Scale - Foundation */
+  --color-gray-50: #fafafa;    /* Subtle backgrounds */
+  --color-gray-100: #f5f5f5;   /* Card backgrounds */
+  --color-gray-200: #e5e5e5;   /* Borders */
+  --color-gray-300: #d4d4d4;   /* Disabled states */
+  --color-gray-400: #a3a3a3;   /* Tertiary text */
+  --color-gray-500: #737373;   /* Icons */
+  --color-gray-600: #525252;   /* Secondary text */
+  --color-gray-700: #404040;   /* Headers */
+  --color-gray-800: #262626;   /* Dark surfaces */
+  --color-gray-900: #171717;   /* Primary text */
+  --color-gray-950: #0a0a0a;   /* Darkest text */
+
+  /* Brand Blue */
+  --color-blue-50: #ecf3ff;    /* Subtle brand bg */
+  --color-blue-100: #dce9ff;   /* Light brand bg */
+  --color-blue-200: #c0d4ff;   /* Hover states */
+  --color-blue-500: #5167ff;   /* Secondary brand */
+  --color-blue-600: #363ff9;   /* Primary brand */
+  --color-blue-700: #262cdc;   /* Dark brand */
+
+  /* Status Colors */
+  --color-green-50: #f0fdf4;   /* Success subtle */
+  --color-green-100: #dcfce7;  /* Success light */
+  --color-green-600: #16a34a;  /* Success primary */
+  --color-green-700: #15803d;  /* Success dark */
+
+  --color-red-50: #fef2f2;     /* Error subtle */
+  --color-red-100: #fee2e2;    /* Error light */
+  --color-red-600: #dc2626;    /* Error primary */
+  --color-red-700: #b91c1c;    /* Error dark */
+
+  --color-orange-50: #fff7ed;  /* Warning subtle */
+  --color-orange-100: #ffedd5; /* Warning light */
+  --color-orange-600: #ea580c; /* Warning primary */
+  --color-orange-700: #c2410c; /* Warning dark */
+}
+
+/* =============================================================================
+   2. SEMANTIC COLOR TOKENS (Light/Dark Mode)
+============================================================================= */
+
+/* Light Mode */
+:root, .light {
+  /* Text Colors */
+  --text-primary: #171717;      /* Primary text */
+  --text-secondary: #525252;    /* Secondary text */  
+  --text-tertiary: #a3a3a3;     /* Tertiary text */
+  --text-brand: #363ff9;        /* Brand text */
+  --text-success: #15803d;      /* Success text */
+  --text-warning: #c2410c;      /* Warning text */
+  --text-error: #b91c1c;        /* Error text */
+
+  /* Background Colors */
+  --bg-primary: #ffffff;        /* Main surfaces */
+  --bg-subtle: #fafafa;         /* Subtle backgrounds */
+  --bg-secondary: #f5f5f5;      /* Card backgrounds */
+  --bg-brand: #363ff9;          /* Brand buttons */
+  --bg-brand-subtle: #ecf3ff;   /* Brand highlights */
+  --bg-success: #16a34a;        /* Success buttons */
+  --bg-success-subtle: #f0fdf4; /* Success highlights */
+  --bg-warning: #ea580c;        /* Warning buttons */
+  --bg-warning-subtle: #fff7ed; /* Warning highlights */
+  --bg-error: #dc2626;          /* Error buttons */
+  --bg-error-subtle: #fef2f2;   /* Error highlights */
+
+  /* Border Colors */
+  --border-primary: #e5e5e5;    /* Default borders */
+  --border-secondary: #d4d4d4;  /* Secondary borders */
+  --border-brand: #363ff9;      /* Focus borders */
+  --border-success: #16a34a;    /* Success borders */
+  --border-warning: #ea580c;    /* Warning borders */
+  --border-error: #dc2626;      /* Error borders */
+}
+
+/* Dark Mode */
+.dark {
+  /* Text Colors */
+  --text-primary: #fafafa;      /* Primary text */
+  --text-secondary: #d4d4d4;    /* Secondary text */
+  --text-tertiary: #a3a3a3;     /* Tertiary text */
+  --text-brand: #5167ff;        /* Brand text */
+  --text-success: #16a34a;      /* Success text */
+  --text-warning: #ea580c;      /* Warning text */
+  --text-error: #dc2626;        /* Error text */
+
+  /* Background Colors */
+  --bg-primary: #262626;        /* Main surfaces */
+  --bg-subtle: #171717;         /* Subtle backgrounds */
+  --bg-secondary: #404040;      /* Card backgrounds */
+  --bg-brand: #5167ff;          /* Brand buttons */
+  --bg-brand-subtle: #dce9ff;   /* Brand highlights */
+  --bg-success: #16a34a;        /* Success buttons */
+  --bg-success-subtle: #dcfce7; /* Success highlights */
+  --bg-warning: #ea580c;        /* Warning buttons */
+  --bg-warning-subtle: #ffedd5; /* Warning highlights */
+  --bg-error: #dc2626;          /* Error buttons */
+  --bg-error-subtle: #fee2e2;   /* Error highlights */
+
+  /* Border Colors */
+  --border-primary: #525252;    /* Default borders */
+  --border-secondary: #737373;  /* Secondary borders */
+  --border-brand: #5167ff;      /* Focus borders */
+  --border-success: #16a34a;    /* Success borders */
+  --border-warning: #ea580c;    /* Warning borders */
+  --border-error: #dc2626;      /* Error borders */
+}
+
+/* =============================================================================
+   3. TYPOGRAPHY SYSTEM (Inter Font)
+============================================================================= */
+
+@theme {
+  /* Font Family */
+  --font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, monospace;
+
+  /* Headings */
+  --text-h1: 2rem;              /* 32px - Page titles */
+  --text-h1--line-height: 1.25;
+  --text-h1--font-weight: 600;
+
+  --text-h2: 1.5rem;            /* 24px - Section titles */
+  --text-h2--line-height: 1.25;
+  --text-h2--font-weight: 600;
+
+  --text-h3: 1.25rem;           /* 20px - Subsections */
+  --text-h3--line-height: 1.25;
+  --text-h3--font-weight: 600;
+
+  --text-h4: 1rem;              /* 16px - Card titles */
+  --text-h4--line-height: 1.25;
+  --text-h4--font-weight: 600;
+
+  /* Body Text */
+  --text-body-lg: 1rem;         /* 16px - Large body */
+  --text-body-lg--line-height: 1.5;
+  --text-body-lg--font-weight: 400;
+
+  --text-body: 0.875rem;        /* 14px - Default body */
+  --text-body--line-height: 1.5;
+  --text-body--font-weight: 400;
+
+  --text-body-sm: 0.75rem;      /* 12px - Small text */
+  --text-body-sm--line-height: 1.5;
+  --text-body-sm--font-weight: 400;
+
+  /* Labels & UI */
+  --text-label: 0.875rem;       /* 14px - Form labels */
+  --text-label--line-height: 1.5;
+  --text-label--font-weight: 500;
+
+  --text-caption: 0.75rem;      /* 12px - Captions */
+  --text-caption--line-height: 1.5;
+  --text-caption--font-weight: 400;
+}
+
+/* =============================================================================
+   4. SPACING & SIZING SCALE
+============================================================================= */
+
+@theme {
+  /* Border Radius */
+  --radius-sm: 0.25rem;         /* 4px - Small elements */
+  --radius: 0.5rem;             /* 8px - Default radius */
+  --radius-lg: 0.75rem;         /* 12px - Cards */
+  --radius-xl: 1rem;            /* 16px - Large containers */
+  --radius-full: 9999px;        /* Pills/badges */
+
+  /* Spacing Scale */
+  --spacing-1: 0.25rem;         /* 4px */
+  --spacing-2: 0.5rem;          /* 8px */
+  --spacing-3: 0.75rem;         /* 12px */
+  --spacing-4: 1rem;            /* 16px */
+  --spacing-5: 1.25rem;         /* 20px */
+  --spacing-6: 1.5rem;          /* 24px */
+  --spacing-8: 2rem;            /* 32px */
+  --spacing-10: 2.5rem;         /* 40px */
+  --spacing-12: 3rem;           /* 48px */
+  --spacing-16: 4rem;           /* 64px */
+}
+
+/* =============================================================================
+   5. SHADOWS & FOCUS STATES
+============================================================================= */
+
+@theme {
+  /* Elevation Shadows */
+  --shadow-sm: 0px 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow: 0px 1px 3px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0px 4px 6px rgba(0, 0, 0, 0.07), 0px 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0px 10px 15px rgba(0, 0, 0, 0.1), 0px 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0px 20px 25px rgba(0, 0, 0, 0.1), 0px 10px 10px rgba(0, 0, 0, 0.04);
+
+  /* Focus Ring */
+  --shadow-focus: 0px 0px 0px 3px rgba(54, 63, 249, 0.3);
+  --shadow-focus-success: 0px 0px 0px 3px rgba(22, 163, 74, 0.3);
+  --shadow-focus-warning: 0px 0px 0px 3px rgba(234, 88, 12, 0.3);
+  --shadow-focus-error: 0px 0px 0px 3px rgba(220, 38, 38, 0.3);
+}
+
+/* =============================================================================
+   6. COMPONENT PATTERNS
+============================================================================= */
+
+/* Tailwind Inline Theme - Apply Semantic Tokens */
+@theme inline {
+  /* Text Colors */
+  --text-color-primary: var(--text-primary);
+  --text-color-secondary: var(--text-secondary);
+  --text-color-tertiary: var(--text-tertiary);
+  --text-color-brand: var(--text-brand);
+  --text-color-success: var(--text-success);
+  --text-color-warning: var(--text-warning);
+  --text-color-error: var(--text-error);
+
+  /* Background Colors */
+  --background-color-primary: var(--bg-primary);
+  --background-color-subtle: var(--bg-subtle);
+  --background-color-secondary: var(--bg-secondary);
+  --background-color-brand: var(--bg-brand);
+  --background-color-brand-subtle: var(--bg-brand-subtle);
+  --background-color-success: var(--bg-success);
+  --background-color-success-subtle: var(--bg-success-subtle);
+  --background-color-warning: var(--bg-warning);
+  --background-color-warning-subtle: var(--bg-warning-subtle);
+  --background-color-error: var(--bg-error);
+  --background-color-error-subtle: var(--bg-error-subtle);
+
+  /* Border Colors */
+  --border-color-primary: var(--border-primary);
+  --border-color-secondary: var(--border-secondary);
+  --border-color-brand: var(--border-brand);
+  --border-color-success: var(--border-success);
+  --border-color-warning: var(--border-warning);
+  --border-color-error: var(--border-error);
+
+  /* Apply Focus Ring */
+  --ring-color-brand: var(--border-brand);
+  --ring-offset-width: 2px;
+  --ring-offset-color: var(--bg-primary);
+}
+
+/* =============================================================================
+   7. LOADING ANIMATIONS
+============================================================================= */
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =============================================================================
+   8. UTILITY OVERRIDES
+============================================================================= */
+
+@layer base {
+  /* Apply Inter font globally */
+  body {
+    font-family: var(--font-sans);
+    color: var(--text-primary);
+    background-color: var(--bg-primary);
+  }
+
+  /* Remove default focus outlines */
+  *:focus {
+    outline: none;
+  }
+
+  /* Apply focus ring to focusable elements */
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  a:focus-visible {
+    box-shadow: var(--shadow-focus);
+  }
+}
+
+/*
+=============================================================================
+USAGE EXAMPLES
+=============================================================================
+
+COLORS:
+ui:text-primary, ui:text-secondary, ui:text-tertiary
+ui:text-brand, ui:text-success, ui:text-warning, ui:text-error
+
+ui:bg-primary, ui:bg-subtle, ui:bg-secondary  
+ui:bg-brand, ui:bg-brand-subtle
+ui:bg-success, ui:bg-success-subtle
+
+ui:border-primary, ui:border-brand
+ui:border-success, ui:border-warning, ui:border-error
+
+BUTTON EXAMPLES:
+<button class="ui:bg-brand ui:text-white ui:px-4 ui:py-2 ui:rounded">Primary</button>
+<button class="ui:bg-subtle ui:text-primary ui:border ui:border-primary ui:px-4 ui:py-2 ui:rounded">Secondary</button>
+
+CARD EXAMPLE:
+<div class="ui:bg-secondary ui:border ui:border-primary ui:rounded-lg ui:p-6 ui:shadow">
+  <h3 class="ui:text-h3 ui:text-primary ui:mb-2">Card Title</h3>
+  <p class="ui:text-body ui:text-secondary">Card content goes here.</p>
+</div>
+
+INPUT EXAMPLE:
+<input class="ui:border ui:border-primary ui:rounded ui:px-3 ui:py-2 ui:text-body focus-visible:ui:border-brand focus-visible:ui:shadow-focus" />
+
+=============================================================================
+*/

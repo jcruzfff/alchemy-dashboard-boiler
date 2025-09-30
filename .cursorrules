@@ -1,0 +1,176 @@
+# Design System Rules for Dashboard Build
+
+## 🎯 CORE PRINCIPLE
+When creating NEW components from scratch, use the integrated design system with semantic tokens. Existing dashboard components remain unchanged.
+
+## 🎨 DESIGN SYSTEM USAGE
+
+### Colors (Use Semantic Tokens)
+```tsx
+// ✅ CORRECT - Use semantic color classes
+className="text-primary bg-subtle border-primary"
+className="text-brand bg-brand-subtle"
+className="text-success bg-success-subtle"
+
+// ❌ AVOID - Hard-coded colors for new components
+className="text-gray-900 bg-gray-100"
+className="text-blue-600 bg-blue-50"
+```
+
+### Typography (Use Design System Scale)
+```tsx
+// ✅ CORRECT - Use semantic typography
+className="text-h1 text-primary"     // Page titles
+className="text-h2 text-primary"     // Section titles  
+className="text-h3 text-primary"     // Subsections
+className="text-h4 text-primary"     // Card titles
+className="text-body text-secondary" // Body text
+className="text-label text-primary"  // Form labels
+className="text-caption text-tertiary" // Captions
+
+// ❌ AVOID - Custom font sizes for new components
+className="text-lg text-xl text-2xl"
+```
+
+### Spacing (Use Design System Scale)
+```tsx
+// ✅ CORRECT - Use semantic spacing
+className="p-4 m-2 gap-3"  // Uses design system scale
+className="space-y-4"      // Consistent spacing
+
+// ❌ AVOID - Arbitrary spacing for new components
+className="p-[17px] m-[23px]"
+```
+
+### Shadows & Effects
+```tsx
+// ✅ CORRECT - Use design system shadows
+className="shadow shadow-md shadow-lg"
+className="shadow-focus"           // Focus states
+className="shadow-focus-success"   // Success focus
+className="shadow-focus-warning"   // Warning focus
+className="shadow-focus-error"     // Error focus
+```
+
+### Border Radius
+```tsx
+// ✅ CORRECT - Use design system radius
+className="rounded-sm"    // 4px - Small elements
+className="rounded"       // 8px - Default
+className="rounded-lg"    // 12px - Cards
+className="rounded-xl"    // 16px - Large containers
+className="rounded-full"  // Pills/badges
+```
+
+## 🚫 EXISTING DASHBOARD RULES
+
+### Preserve Current Implementation
+- **DO NOT** modify existing `SmartWalletsOverview.tsx` components
+- **DO NOT** change existing color classes like `neutral-50`, `neutral-100`, etc.
+- **DO NOT** alter existing font classes like `font-medium-inter`, `font-semibold-inter`
+- **DO NOT** modify existing spacing like `w-55`, `top-26`
+
+### Current Dashboard Uses:
+- `neutral-50`, `neutral-100`, `neutral-200`, `neutral-500`, `neutral-600`, `neutral-950`
+- `zinc-100`, `brand` (#363ff9)
+- `font-medium-inter`, `font-semibold-inter`
+- Custom spacing: `w-55`, `top-26`
+
+## 📋 COMPONENT PATTERNS
+
+### Button Components
+```tsx
+// Primary Button
+<button className="bg-brand text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors focus-visible:shadow-focus">
+  Primary Action
+</button>
+
+// Secondary Button  
+<button className="bg-subtle text-primary border border-primary px-4 py-2 rounded hover:bg-gray-100 transition-colors focus-visible:shadow-focus">
+  Secondary Action
+</button>
+
+// Status Buttons
+<button className="bg-success text-white px-4 py-2 rounded hover:bg-green-700 transition-colors">
+  Success
+</button>
+```
+
+### Card Components
+```tsx
+<div className="bg-secondary border border-primary rounded-lg p-6 shadow">
+  <h3 className="text-h3 text-primary mb-2">Card Title</h3>
+  <p className="text-body text-secondary mb-4">Card content goes here.</p>
+  <button className="bg-brand text-white px-3 py-1 rounded text-sm">
+    Action
+  </button>
+</div>
+```
+
+### Form Components
+```tsx
+<div>
+  <label className="text-label text-primary block mb-1">Label</label>
+  <input 
+    className="w-full border border-primary rounded px-3 py-2 text-body focus-visible:border-brand focus-visible:shadow-focus"
+    placeholder="Enter value"
+  />
+</div>
+```
+
+### Status Indicators
+```tsx
+<div className="bg-success-subtle text-success px-3 py-1 rounded-full text-sm">
+  Success Message
+</div>
+
+<div className="bg-warning-subtle text-warning px-3 py-1 rounded-full text-sm">
+  Warning Message
+</div>
+
+<div className="bg-error-subtle text-error px-3 py-1 rounded-full text-sm">
+  Error Message
+</div>
+```
+
+## 🎯 IMPLEMENTATION GUIDELINES
+
+### For New Components:
+1. **Always use semantic tokens** (`text-primary`, `bg-subtle`, etc.)
+2. **Follow the design system scale** for spacing, typography, colors
+3. **Use consistent patterns** from the examples above
+4. **Include proper focus states** with `focus-visible:shadow-focus`
+5. **Add hover states** with appropriate color transitions
+
+### For Existing Components:
+1. **Leave unchanged** - don't modify existing dashboard
+2. **Preserve current styling** - maintain exact visual appearance
+3. **Don't refactor** - existing code works perfectly
+
+## 🔧 TECHNICAL NOTES
+
+### Available Design System Classes:
+- **Text Colors**: `text-primary`, `text-secondary`, `text-tertiary`, `text-brand`, `text-success`, `text-warning`, `text-error`
+- **Background Colors**: `bg-primary`, `bg-subtle`, `bg-secondary`, `bg-brand`, `bg-brand-subtle`, `bg-success`, `bg-success-subtle`, `bg-warning`, `bg-warning-subtle`, `bg-error`, `bg-error-subtle`
+- **Border Colors**: `border-primary`, `border-secondary`, `border-brand`, `border-success`, `border-warning`, `border-error`
+- **Typography**: `text-h1`, `text-h2`, `text-h3`, `text-h4`, `text-body-lg`, `text-body`, `text-body-sm`, `text-label`, `text-caption`
+- **Shadows**: `shadow-sm`, `shadow`, `shadow-md`, `shadow-lg`, `shadow-xl`, `shadow-focus`, `shadow-focus-success`, `shadow-focus-warning`, `shadow-focus-error`
+
+### File Structure:
+- **Design System**: `app/design-system.css` - Contains all semantic tokens
+- **Example Component**: `app/design-system-example.tsx` - Shows usage patterns
+- **Tailwind Config**: `tailwind.config.ts` - Extended with design system tokens
+- **Existing Dashboard**: `app/SmartWalletsOverview.tsx` - Preserved as-is
+
+## ✅ SUCCESS CRITERIA
+
+When creating new components:
+- [ ] Uses semantic color tokens (`text-primary`, `bg-subtle`, etc.)
+- [ ] Follows typography scale (`text-h1`, `text-body`, etc.)
+- [ ] Uses consistent spacing (design system scale)
+- [ ] Includes proper focus states
+- [ ] Has appropriate hover states
+- [ ] Follows established component patterns
+- [ ] Does NOT modify existing dashboard components
+
+Remember: This design system is for NEW components only. The existing dashboard remains untouched and fully functional.
