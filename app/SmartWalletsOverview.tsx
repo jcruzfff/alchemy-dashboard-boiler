@@ -114,6 +114,7 @@ export default function SmartWalletsOverview() {
   const [expandedItems, setExpandedItems] = React.useState<Set<string>>(new Set([]));
   const [hoveredItem, setHoveredItem] = React.useState<string | null>(null);
   const [activeTab, setActiveTab] = React.useState<string>('Overview');
+  const [currentPage, setCurrentPage] = React.useState<string>('Smart Wallets');
 
   const toggleExpanded = (item: string) => {
     setExpandedItems(prev => {
@@ -346,11 +347,12 @@ export default function SmartWalletsOverview() {
                         {['Smart Wallets', 'Gas Manager', 'Portfolio API', 'Swaps', 'Funding'].map((item, index) => (
                           <div 
                             key={item}
-                            className={`px-2 py-1 text-sm text-neutral-600 cursor-pointer transition-colors rounded-sm h-[29px] flex items-center ${
+                            className={`px-2 py-1 text-sm cursor-pointer transition-colors rounded-sm h-[29px] flex items-center ${
                               hoveredItem === item ? 'bg-[#ECF3FF]' : ''
-                            }`}
+                            } ${currentPage === item ? 'bg-[#ECF3FF] text-neutral-950' : 'text-neutral-600'}`}
                             onMouseEnter={() => setHoveredItem(item)}
                             onMouseLeave={() => setHoveredItem(null)}
+                            onClick={() => setCurrentPage(item)}
                             style={{ marginBottom: '4px' }}
                           >
                             {item}
@@ -500,46 +502,49 @@ export default function SmartWalletsOverview() {
       {/* Main Content Area - Responsive */}
       <div className="absolute content-stretch flex flex-col gap-6 items-start left-55 top-26 right-0 bottom-0 overflow-auto">
         <div className="w-full px-6">
-          {/* Product Header */}
-          <div className="content-stretch flex gap-2.5 items-center relative shrink-0 w-full">
-            <div className="basis-0 content-stretch flex gap-3 items-center grow min-h-px min-w-px relative shrink-0">
-              <div className="content-stretch flex flex-col items-start justify-center relative shrink-0">
-                <div className="font-semibold-inter leading-[0] not-italic relative shrink-0 text-[32px] text-center text-neutral-950 text-nowrap tracking-[-0.64px]">
-                  <p className="leading-[1.24] whitespace-pre">Smart Wallets</p>
-                </div>
-              </div>
-            </div>
-            
-            {/* API Key Section */}
-            <div className="bg-white content-stretch flex items-center relative rounded-lg shrink-0">
-              <div className="absolute border border-neutral-200 border-solid inset-[-1px] pointer-events-none rounded-lg" />
-              <div className="flex flex-row items-center self-stretch">
-                <div className="bg-neutral-50 box-border content-stretch flex h-full items-center px-3 py-1 relative rounded-bl-lg rounded-tl-lg shrink-0">
-                  <div className="absolute border-r border-neutral-200 border-solid inset-0 pointer-events-none rounded-bl-lg rounded-tl-lg" />
-                  <div className="font-normal leading-[0] not-italic relative shrink-0 text-sm text-neutral-500 text-nowrap">
-                    <p className="leading-6 whitespace-pre">API Key</p>
-                  </div>
-                </div>
-              </div>
-              <div className="box-border content-stretch flex gap-2 items-center overflow-clip px-2 py-1 relative rounded-br-lg rounded-tr-lg shrink-0 w-[317px]">
-                <div className="basis-0 font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-sm text-neutral-600">
-                  <p className="leading-6">5omnSigeCkcU6RC6VxS4W</p>
-                </div>
-                <div className="bg-white box-border content-stretch flex gap-2 items-center px-2 py-1 relative rounded-lg shrink-0">
-                  <div className="absolute border border-neutral-200 border-solid inset-[-1px] pointer-events-none rounded-lg" />
-                  <div className="relative shrink-0 size-4">
-                    <img alt="" className="block max-w-none size-full" src="/icons/Copy-bold.svg" />
-                  </div>
-                  <div className="font-medium-inter leading-[0] not-italic relative shrink-0 text-sm text-neutral-600 text-nowrap">
-                    <p className="leading-5 whitespace-pre">Copy</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+           {/* Product Header */}
+           <div className="content-stretch flex gap-2.5 items-center relative shrink-0 w-full">
+             <div className="basis-0 content-stretch flex gap-3 items-center grow min-h-px min-w-px relative shrink-0">
+               <div className="content-stretch flex flex-col items-start justify-center relative shrink-0">
+                 <div className="font-semibold-inter leading-[0] not-italic relative shrink-0 text-[32px] text-center text-neutral-950 text-nowrap tracking-[-0.64px]">
+                   <p className="leading-[1.24] whitespace-pre">{currentPage}</p>
+                 </div>
+               </div>
+             </div>
+             
+             {/* API Key Section - Only show for Smart Wallets */}
+             {currentPage === 'Smart Wallets' && (
+               <div className="bg-white content-stretch flex items-center relative rounded-lg shrink-0">
+                 <div className="absolute border border-neutral-200 border-solid inset-[-1px] pointer-events-none rounded-lg" />
+                 <div className="flex flex-row items-center self-stretch">
+                   <div className="bg-neutral-50 box-border content-stretch flex h-full items-center px-3 py-1 relative rounded-bl-lg rounded-tl-lg shrink-0">
+                     <div className="absolute border-r border-neutral-200 border-solid inset-0 pointer-events-none rounded-bl-lg rounded-tl-lg" />
+                     <div className="font-normal leading-[0] not-italic relative shrink-0 text-sm text-neutral-500 text-nowrap">
+                       <p className="leading-6 whitespace-pre">API Key</p>
+                     </div>
+                   </div>
+                 </div>
+                 <div className="box-border content-stretch flex gap-2 items-center overflow-clip px-2 py-1 relative rounded-br-lg rounded-tr-lg shrink-0 w-[317px]">
+                   <div className="basis-0 font-normal grow leading-[0] min-h-px min-w-px not-italic relative shrink-0 text-sm text-neutral-600">
+                     <p className="leading-6">5omnSigeCkcU6RC6VxS4W</p>
+                   </div>
+                   <div className="bg-white box-border content-stretch flex gap-2 items-center px-2 py-1 relative rounded-lg shrink-0">
+                     <div className="absolute border border-neutral-200 border-solid inset-[-1px] pointer-events-none rounded-lg" />
+                     <div className="relative shrink-0 size-4">
+                       <img alt="" className="block max-w-none size-full" src="/icons/Copy-bold.svg" />
+                     </div>
+                     <div className="font-medium-inter leading-[0] not-italic relative shrink-0 text-sm text-neutral-600 text-nowrap">
+                       <p className="leading-5 whitespace-pre">Copy</p>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+             )}
+           </div>
 
-          {/* Tab Bar */}
-          <div className="content-stretch flex gap-6 items-start relative shrink-0 w-full mt-6">
+          {/* Tab Bar - Only show for Smart Wallets */}
+          {currentPage === 'Smart Wallets' && (
+            <div className="content-stretch flex gap-6 items-start relative shrink-0 w-full mt-6">
             <div className="absolute border-b border-neutral-200 border-solid inset-0 pointer-events-none" />
             
             {/* Overview Tab */}
@@ -588,51 +593,81 @@ export default function SmartWalletsOverview() {
               <div className={`font-medium-inter leading-[0] not-italic relative shrink-0 text-sm text-nowrap ${activeTab === 'Linked apps' ? 'text-[#363ff9]' : 'text-neutral-500'}`}>
                 <p className="leading-5 whitespace-pre">Linked apps</p>
               </div>
-            </div>
-          </div>
-        </div>
+             </div>
+           </div>
+          )}
+         </div>
 
-        {/* Main Content Area */}
-        <div className="flex-1 w-full px-6 pb-6">
-          <div className="bg-white rounded-lg border border-neutral-200 p-6 h-full">
-            {activeTab === 'Overview' && (
-              <div>
-                <h2 className="text-lg font-semibold text-neutral-900 mb-4">Overview content will go here</h2>
-                <p className="text-neutral-600">This is the Overview tab content.</p>
-              </div>
-            )}
-            {activeTab === 'Quickstart' && (
-              <div>
-                <h2 className="text-lg font-semibold text-neutral-900 mb-4">Quickstart content will go here</h2>
-                <p className="text-neutral-600">This is the Quickstart tab content.</p>
-              </div>
-            )}
-            {activeTab === 'Usage & Keys' && (
-              <div>
-                <h2 className="text-lg font-semibold text-neutral-900 mb-4">Usage & Keys content will go here</h2>
-                <p className="text-neutral-600">This is the Usage & Keys tab content.</p>
-              </div>
-            )}
-            {activeTab === 'Email Login' && (
-              <div>
-                <h2 className="text-lg font-semibold text-neutral-900 mb-4">Email Login content will go here</h2>
-                <p className="text-neutral-600">This is the Email Login tab content.</p>
-              </div>
-            )}
-            {activeTab === 'Social Login' && (
-              <div>
-                <h2 className="text-lg font-semibold text-neutral-900 mb-4">Social Login content will go here</h2>
-                <p className="text-neutral-600">This is the Social Login tab content.</p>
-              </div>
-            )}
-            {activeTab === 'Linked apps' && (
-              <div>
-                <h2 className="text-lg font-semibold text-neutral-900 mb-4">Linked apps content will go here</h2>
-                <p className="text-neutral-600">This is the Linked apps tab content.</p>
-              </div>
-            )}
-          </div>
-        </div>
+         {/* Main Content Area */}
+         <div className="flex-1 w-full px-6 pb-6">
+           <div className="bg-white rounded-lg border border-neutral-200 p-6 h-full">
+             {currentPage === 'Smart Wallets' && (
+               <div>
+                 {activeTab === 'Overview' && (
+                   <div>
+                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">Overview content will go here</h2>
+                     <p className="text-neutral-600">This is the Overview tab content.</p>
+                   </div>
+                 )}
+                 {activeTab === 'Quickstart' && (
+                   <div>
+                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">Quickstart content will go here</h2>
+                     <p className="text-neutral-600">This is the Quickstart tab content.</p>
+                   </div>
+                 )}
+                 {activeTab === 'Usage & Keys' && (
+                   <div>
+                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">Usage & Keys content will go here</h2>
+                     <p className="text-neutral-600">This is the Usage & Keys tab content.</p>
+                   </div>
+                 )}
+                 {activeTab === 'Email Login' && (
+                   <div>
+                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">Email Login content will go here</h2>
+                     <p className="text-neutral-600">This is the Email Login tab content.</p>
+                   </div>
+                 )}
+                 {activeTab === 'Social Login' && (
+                   <div>
+                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">Social Login content will go here</h2>
+                     <p className="text-neutral-600">This is the Social Login tab content.</p>
+                   </div>
+                 )}
+                 {activeTab === 'Linked apps' && (
+                   <div>
+                     <h2 className="text-lg font-semibold text-neutral-900 mb-4">Linked apps content will go here</h2>
+                     <p className="text-neutral-600">This is the Linked apps tab content.</p>
+                   </div>
+                 )}
+               </div>
+             )}
+             
+             {/* Other Wallet Pages - Simple content only */}
+             {currentPage === 'Gas Manager' && (
+               <div>
+                 <h2 className="text-lg font-semibold text-neutral-900 mb-4">Gas Manager</h2>
+               </div>
+             )}
+             
+             {currentPage === 'Portfolio API' && (
+               <div>
+                 <h2 className="text-lg font-semibold text-neutral-900 mb-4">Portfolio API</h2>
+               </div>
+             )}
+             
+             {currentPage === 'Swaps' && (
+               <div>
+                 <h2 className="text-lg font-semibold text-neutral-900 mb-4">Swaps</h2>
+               </div>
+             )}
+             
+             {currentPage === 'Funding' && (
+               <div>
+                 <h2 className="text-lg font-semibold text-neutral-900 mb-4">Funding</h2>
+               </div>
+             )}
+           </div>
+         </div>
       </div>
     </div>
   );
