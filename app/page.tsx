@@ -1,5 +1,5 @@
-import SmartWalletsOverview from './SmartWalletsOverview';
+import { Dashboard } from './ui/src/components/Dashboard';
 
 export default function Home() {
-  return <SmartWalletsOverview />;
+  return <Dashboard />;
 }

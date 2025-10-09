@@ -14,3 +14,4 @@ export { Sidebar } from './components/Sidebar';
 export { TopNav } from './components/TopNav';
 export { MainContent } from './components/MainContent';
 export { Dashboard } from './components/Dashboard';
+export { WalletsHeader } from './components/WalletsHeader';

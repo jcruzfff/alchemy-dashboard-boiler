@@ -1,3 +1,9 @@
+clear---
+description: Design System Usage Rules for New Components
+globs: app/ui/src/**/*.tsx, app/components/**/*.tsx
+alwaysApply: true
+---
+
 # Design System Rules for Dashboard Build
 
 ## 🎯 CORE PRINCIPLE

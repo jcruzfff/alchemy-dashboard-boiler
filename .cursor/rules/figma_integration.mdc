@@ -1,0 +1,263 @@
+---
+description: Ensure pixel-perfect implementation when using MCP Figma tools
+globs: app/**/*.tsx, app/**/*.ts
+alwaysApply: true
+---
+
+# Figma Integration Rules for Pixel-Perfect Development
+
+## 🎯 CORE PRINCIPLE
+When using MCP Figma tools (`get_code`, `get_screenshot`, `get_metadata`), implement EXACTLY as specified in the Figma code. No approximations, no "close enough" - pixel perfect every time.
+
+## 📋 MANDATORY WORKFLOW
+
+### 1. **Always Get Both Code AND Screenshot**
+```typescript
+// ✅ REQUIRED: Get both code and visual context
+const figmaCode = await mcp_Figma_get_code({...});
+const figmaScreenshot = await mcp_Figma_get_screenshot({...});
+```
+
+### 2. **Analyze Figma Code Line by Line**
+- **Typography**: Copy EXACT font families, sizes, weights, line heights, letter spacing
+- **Spacing**: Use EXACT pixel values (e.g., `gap-[8px]`, `p-[24px]`, `m-[16px]`)
+- **Colors**: Use EXACT hex values (e.g., `#363ff9`, `#15803d`)
+- **Icons**: Use EXACT icon references and positioning
+- **Layout**: Copy EXACT flexbox properties, positioning, and sizing
+
+### 3. **Icon Implementation Rules**
+
+#### **Icon Mapping (CRITICAL)**
+```typescript
+// ✅ CORRECT: Map Figma icon names to actual files
+const iconMap = {
+  'ArrowUpRight-bold': '/icons/ArrowUpRight-bold.svg',
+  'ArrowUpRight-green': '/icons/ArrowUpRight-green.svg', 
+  'Copy-bold': '/icons/Copy-bold.svg',
+  'CaretDown-bold': '/icons/CaretDown-bold.svg',
+  // Always verify file exists in /public/icons/
+};
+```
+
+#### **Icon Placement Rules**
+- **Action Buttons**: Use `ArrowUpRight-bold.svg` for external actions
+- **Percentage Badges**: Use `ArrowUpRight-green.svg` for positive indicators
+- **Card Headers**: Use `ArrowUpRight-bold.svg` for expandable cards
+- **Dropdowns**: Use `CaretDown-bold.svg` for selectors
+- **Copy Actions**: Use `Copy-bold.svg` for copy buttons
+
+#### **Icon Sizing (EXACT)**
+```typescript
+// ✅ CORRECT: Use exact Figma dimensions
+<div className="relative shrink-0 size-[16px]">
+  <div className="absolute inset-[20.31%_20.31%_20.31%_20.3%]">
+    <img alt="" className="block max-w-none size-full" src="/icons/ArrowUpRight-bold.svg" />
+  </div>
+</div>
+```
+
+### 4. **Typography Implementation Rules**
+
+#### **Font Families (EXACT)**
+```typescript
+// ✅ CORRECT: Use exact Figma font specifications
+className="font-['Inter:Semi_Bold',_sans-serif] font-semibold"
+className="font-['Inter:Medium',_sans-serif] font-medium" 
+className="font-['Inter:Regular',_sans-serif] font-normal"
+```
+
+#### **Text Sizes and Weights (EXACT)**
+```typescript
+// ✅ CORRECT: Copy exact Figma text properties
+// Title: 32px, Semi Bold, tracking -0.64px
+className="text-[32px] font-semibold tracking-[-0.64px]"
+
+// Card Labels: 16px, Semi Bold, tracking -0.32px  
+className="text-[16px] font-semibold tracking-[-0.32px]"
+
+// Card Values: 24px, Semi Bold, tracking -0.48px
+className="text-[24px] font-semibold tracking-[-0.48px]"
+
+// Badge Text: 12px, Medium, leading 18px
+className="text-[12px] font-medium leading-[18px]"
+```
+
+### 5. **Spacing Implementation Rules**
+
+#### **Use EXACT Pixel Values**
+```typescript
+// ✅ CORRECT: Use exact Figma spacing
+className="gap-[8px]"     // Not gap-2
+className="p-[24px]"      // Not p-6  
+className="px-[12px]"     // Not px-3
+className="py-[16px]"     // Not py-4
+className="rounded-[8px]" // Not rounded-lg
+```
+
+#### **Layout Spacing (EXACT)**
+```typescript
+// ✅ CORRECT: Copy exact Figma layout properties
+className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full"
+className="basis-0 content-stretch flex grow items-start min-h-px min-w-px relative shrink-0"
+```
+
+### 6. **Color Implementation Rules**
+
+#### **Use EXACT Hex Values**
+```typescript
+// ✅ CORRECT: Use exact Figma colors
+className="text-[#363ff9]"     // Brand blue
+className="text-[#15803d]"     // Success green  
+className="text-[#383838]"     // Dark gray
+className="bg-[#363ff9]"       // Brand background
+className="border-[#eeeeee]"   // Light border
+```
+
+### 7. **Component Structure Rules**
+
+#### **Copy EXACT Figma Hierarchy**
+```typescript
+// ✅ CORRECT: Maintain exact Figma structure
+<div className="box-border content-stretch flex flex-col gap-[10px] items-start p-[48px] relative size-full">
+  <div className="basis-0 content-stretch flex flex-col gap-[24px] grow items-start min-h-px min-w-px relative shrink-0 w-full">
+    <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
+      {/* Page Tab Header */}
+    </div>
+    <div className="content-stretch flex flex-col gap-[24px] items-start relative shrink-0 w-full">
+      {/* Content-Area */}
+    </div>
+  </div>
+</div>
+```
+
+### 8. **Validation Rules**
+
+#### **Before Implementation**
+- [ ] **Screenshot Analysis**: Study the visual design carefully
+- [ ] **Code Analysis**: Read every line of Figma code
+- [ ] **Icon Verification**: Confirm all icons exist in `/public/icons/`
+- [ ] **Typography Check**: Verify font families and weights
+- [ ] **Spacing Check**: Confirm all pixel values match
+
+#### **After Implementation**
+- [ ] **Visual Comparison**: Compare with Figma screenshot
+- [ ] **Icon Placement**: Verify icons are in correct locations
+- [ ] **Typography Match**: Check font sizes, weights, spacing
+- [ ] **Layout Accuracy**: Confirm positioning and sizing
+- [ ] **Color Accuracy**: Verify all colors match Figma
+
+### 9. **Common Mistakes to Avoid**
+
+#### **❌ DON'T: Approximate Values**
+```typescript
+// ❌ WRONG: Using approximate Tailwind classes
+className="text-2xl"        // Instead of text-[24px]
+className="gap-4"           // Instead of gap-[16px]  
+className="p-6"             // Instead of p-[24px]
+className="rounded-lg"      // Instead of rounded-[8px]
+```
+
+#### **❌ DON'T: Use Wrong Icons**
+```typescript
+// ❌ WRONG: Using generic icons
+src="/icons/Header Button (app-centric).svg"  // Wrong icon
+src="/icons/Copy-bold.svg"                    // Wrong for arrows
+
+// ✅ CORRECT: Use specific icons
+src="/icons/ArrowUpRight-bold.svg"            // For action buttons
+src="/icons/ArrowUpRight-green.svg"           // For percentage badges
+```
+
+#### **❌ DON'T: Skip Icon Verification**
+```typescript
+// ❌ WRONG: Not checking if icon exists
+<img src="/icons/SomeIcon.svg" />  // May not exist
+
+// ✅ CORRECT: Verify icon exists first
+// Check /public/icons/ directory before using
+```
+
+### 10. **File Organization Rules**
+
+#### **Icon Management**
+- **Location**: All icons in `/public/icons/`
+- **Naming**: Use exact Figma names (e.g., `ArrowUpRight-bold.svg`)
+- **Verification**: Always check file exists before implementing
+- **Fallback**: If icon missing, request user to add it
+
+#### **Component Structure**
+- **Main Container**: Always use `p-[48px]` padding
+- **Content Container**: Always use `gap-[24px]` spacing
+- **Content-Area**: This is the boilerplate for new content
+- **Responsive**: Use `basis-0` and `grow` for flexible layouts
+
+## 🎯 SUCCESS CRITERIA
+
+When implementing from Figma:
+- [ ] **Visual Match**: 100% identical to Figma screenshot
+- [ ] **Typography Match**: Exact font families, sizes, weights, spacing
+- [ ] **Icon Accuracy**: Correct icons in correct locations
+- [ ] **Spacing Precision**: Exact pixel values throughout
+- [ ] **Color Accuracy**: Exact hex values for all colors
+- [ ] **Layout Fidelity**: Exact positioning and sizing
+- [ ] **Interactive States**: Proper hover and focus states
+- [ ] **Responsive Behavior**: Maintains design at all breakpoints
+
+## 🔧 IMPLEMENTATION CHECKLIST
+
+### Pre-Development
+- [ ] Get Figma code using `mcp_Figma_get_code`
+- [ ] Get Figma screenshot using `mcp_Figma_get_screenshot`
+- [ ] Analyze visual design and code structure
+- [ ] Verify all required icons exist in `/public/icons/`
+- [ ] Plan component hierarchy and structure
+
+### During Development
+- [ ] Copy exact typography specifications
+- [ ] Use exact spacing values (no approximations)
+- [ ] Implement exact color values
+- [ ] Place icons in correct locations
+- [ ] Maintain exact Figma hierarchy
+- [ ] Test responsive behavior
+
+### Post-Development
+- [ ] Compare with Figma screenshot
+- [ ] Verify all icons are correct
+- [ ] Check typography accuracy
+- [ ] Confirm spacing precision
+- [ ] Test interactive states
+- [ ] Validate responsive design
+
+## 📝 EXAMPLES
+
+### ✅ CORRECT Implementation
+```typescript
+// Exact Figma typography
+<p className="font-['Inter:Semi_Bold',_sans-serif] font-semibold leading-[1.24] not-italic relative shrink-0 text-[32px] text-neutral-950 text-nowrap tracking-[-0.64px] whitespace-pre">
+  Wallets
+</p>
+
+// Exact Figma spacing
+<div className="content-stretch flex gap-[16px] items-start relative shrink-0 w-full">
+
+// Exact Figma icons
+<div className="relative shrink-0 size-[16px]">
+  <div className="absolute inset-[20.31%_20.31%_20.31%_20.3%]">
+    <img alt="" className="block max-w-none size-full" src="/icons/ArrowUpRight-bold.svg" />
+  </div>
+</div>
+```
+
+### ❌ INCORRECT Implementation
+```typescript
+// Approximated typography
+<h1 className="text-3xl font-semibold">Wallets</h1>
+
+// Approximated spacing  
+<div className="flex gap-4 items-start">
+
+// Wrong icons
+<img src="/icons/Header Button (app-centric).svg" />
+```
+
+Remember: **Pixel perfect means pixel perfect. No exceptions.**

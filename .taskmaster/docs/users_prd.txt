@@ -1,0 +1,200 @@
+<context>
+# Overview  
+A comprehensive user management system for the dashboard application that provides administrators with complete control over user accounts, roles, and permissions. This system solves the need for centralized user administration, role-based access control, and user lifecycle management within the existing dashboard infrastructure. It's designed for administrators and team leads who need to manage user access, monitor user activity, and maintain security across the platform.
+
+# Core Features  
+## User Management Dashboard
+- **What it does**: Provides a centralized interface for viewing, managing, and monitoring all users
+- **Why it's important**: Enables efficient user administration and provides visibility into user activity
+- **How it works**: Displays users in a searchable, filterable table with bulk actions and real-time statistics
+
+## User CRUD Operations
+- **What it does**: Create, read, update, and delete user accounts with full profile management
+- **Why it's important**: Essential for user lifecycle management and account maintenance
+- **How it works**: Modal-based forms with validation, role assignment, and profile customization
+
+## Role-Based Access Control (RBAC)
+- **What it does**: Manages user roles (Admin, User, Moderator) with granular permissions
+- **Why it's important**: Ensures security and proper access control across the platform
+- **How it works**: Role assignment interface with permission matrix and inheritance
+
+## User Search & Filtering
+- **What it does**: Advanced search capabilities with multiple filter options
+- **Why it's important**: Enables quick user discovery and management in large user bases
+- **How it works**: Real-time search with filters for role, status, date ranges, and custom criteria
+
+## User Statistics & Analytics
+- **What it does**: Provides insights into user activity, growth, and engagement metrics
+- **Why it's important**: Helps administrators understand user behavior and platform usage
+- **How it works**: Dashboard cards with key metrics, trends, and visual indicators
+
+## User Invitations
+- **What it does**: Send email invitations to new users with pre-assigned roles
+- **Why it's important**: Streamlines user onboarding and ensures proper role assignment
+- **How it works**: Invitation form with email templates and role pre-selection
+
+# User Experience  
+## User Personas
+- **Primary**: Dashboard Administrators - Need full user management capabilities
+- **Secondary**: Team Leads - Need to manage team members and view user activity
+- **Tertiary**: HR/IT Staff - Need to onboard/offboard users and manage permissions
+
+## Key User Flows
+1. **User Discovery Flow**: Search → Filter → View Details → Take Action
+2. **User Creation Flow**: Click Invite → Fill Form → Assign Role → Send Invitation
+3. **User Management Flow**: Select User → Edit Details → Update Role → Save Changes
+4. **Bulk Operations Flow**: Select Multiple Users → Choose Action → Confirm → Execute
+
+## UI/UX Considerations
+- **Design System Integration**: Uses existing semantic tokens (text-primary, bg-subtle, etc.)
+- **Desktop-First**: Optimized for desktop dashboard environment
+- **Consistent Styling**: Follows established component patterns and spacing
+- **Accessibility**: Proper focus states, keyboard navigation, and screen reader support
+- **Performance**: Efficient rendering for large user lists with pagination
+</context>
+<PRD>
+# Technical Architecture  
+## System Components
+- **UserManagement.tsx**: Main container component with layout and state management
+- **UserTable.tsx**: Primary data display with sorting, selection, and pagination
+- **UserForm.tsx**: Reusable form component for create/edit operations
+- **UserFilters.tsx**: Search and filter interface with real-time updates
+- **UserStats.tsx**: Statistics dashboard with key metrics and trends
+- **Modal Components**: CreateUserModal, EditUserModal for form interactions
+
+## Data Models
+```typescript
+interface User {
+  id: string;
+  name: string;
+  email: string;
+  avatar?: string;
+  role: 'admin' | 'user' | 'moderator';
+  status: 'active' | 'inactive' | 'pending';
+  lastActive: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface UserStats {
+  totalUsers: number;
+  activeUsers: number;
+  newThisMonth: number;
+  pendingInvites: number;
+}
+```
+
+## APIs and Integrations
+- **User API Endpoints**: GET /users, POST /users, PUT /users/:id, DELETE /users/:id
+- **Search API**: GET /users/search?q=query&filters=...
+- **Stats API**: GET /users/stats
+- **Invitation API**: POST /users/invite
+
+## Infrastructure Requirements
+- **Frontend**: Next.js 15 with TypeScript and Tailwind CSS
+- **State Management**: React Context or Zustand for user data
+- **Form Handling**: React Hook Form with Zod validation
+- **UI Components**: Custom components using design system tokens
+- **Icons**: Existing SVG icon system from /public/icons/
+
+# Development Roadmap  
+## Phase 1: Foundation & Core UI (MVP)
+- **UserManagement.tsx**: Main page layout and container
+- **UserTable.tsx**: Basic table with user data display
+- **UserStats.tsx**: Statistics cards with mock data
+- **UserFilters.tsx**: Search input and basic filtering
+- **Design System Integration**: Ensure all components use semantic tokens
+
+## Phase 2: User Operations
+- **CreateUserModal.tsx**: User creation form with validation
+- **EditUserModal.tsx**: User editing with pre-populated data
+- **UserForm.tsx**: Reusable form component
+- **Form Validation**: Zod schemas for user data validation
+- **Error Handling**: Proper error states and user feedback
+
+## Phase 3: Advanced Features
+- **Bulk Operations**: Multi-select with bulk actions (activate, deactivate, delete)
+- **Advanced Filtering**: Role, status, date range filters
+- **User Invitations**: Invitation form and email integration
+- **Role Management**: Role assignment and permission display
+- **Loading States**: Skeleton loaders and loading indicators
+
+## Phase 4: Polish & Optimization
+- **Empty States**: No users, no search results, error states
+- **Animations**: Smooth transitions and hover effects
+- **Performance**: Virtual scrolling for large user lists
+- **Accessibility**: Keyboard navigation and screen reader support
+- **Responsive Design**: Ensure proper display on different screen sizes
+
+# Logical Dependency Chain
+## Foundation First (Phase 1)
+1. **UserManagement.tsx** - Main container and layout structure
+2. **UserStats.tsx** - Statistics cards to show data is working
+3. **UserTable.tsx** - Core data display with mock data
+4. **UserFilters.tsx** - Search functionality for user interaction
+
+## Build Upon Foundation (Phase 2)
+1. **UserForm.tsx** - Reusable form component for consistency
+2. **CreateUserModal.tsx** - User creation using the form component
+3. **EditUserModal.tsx** - User editing using the same form component
+4. **Form Validation** - Add validation to ensure data integrity
+
+## Enhance Functionality (Phase 3)
+1. **Bulk Operations** - Multi-select and bulk actions
+2. **Advanced Filtering** - Additional filter options
+3. **User Invitations** - Email invitation system
+4. **Role Management** - Role assignment interface
+
+## Polish & Optimize (Phase 4)
+1. **Empty States** - Handle edge cases gracefully
+2. **Animations** - Smooth user experience
+3. **Performance** - Optimize for large datasets
+4. **Accessibility** - Ensure inclusive design
+
+# Risks and Mitigations  
+## Technical Challenges
+- **Risk**: Large user lists causing performance issues
+- **Mitigation**: Implement pagination and virtual scrolling
+- **Risk**: Form validation complexity with multiple user types
+- **Mitigation**: Use Zod schemas with clear error messages
+
+## MVP Scope Management
+- **Risk**: Feature creep delaying initial release
+- **Mitigation**: Focus on core CRUD operations first, add advanced features incrementally
+- **Risk**: Design system integration complexity
+- **Mitigation**: Use existing semantic tokens and component patterns
+
+## Resource Constraints
+- **Risk**: Time constraints affecting quality
+- **Mitigation**: Prioritize core functionality, polish can be added iteratively
+- **Risk**: User experience consistency
+- **Mitigation**: Follow established design system patterns and component structure
+
+# Appendix  
+## Design System Integration
+- **Colors**: Use semantic tokens (text-primary, bg-subtle, border-primary)
+- **Typography**: Follow established scale (text-h1, text-body, text-caption)
+- **Spacing**: Use consistent spacing scale (p-4, gap-6, space-y-4)
+- **Components**: Follow existing patterns from SmartWalletsOverview.tsx
+
+## Component Structure
+```
+app/ui/src/components/user-management/
+├── UserManagement.tsx        // Main container
+├── UserTable.tsx            // Data table
+├── UserStats.tsx            // Statistics cards
+├── UserFilters.tsx          // Search and filters
+├── UserForm.tsx             // Reusable form
+└── modals/
+    ├── CreateUserModal.tsx
+    └── EditUserModal.tsx
+```
+
+## Technical Specifications
+- **Framework**: Next.js 15 with App Router
+- **Styling**: Tailwind CSS with custom design system
+- **TypeScript**: Full type safety for all components
+- **Icons**: Existing SVG icon system
+- **Forms**: React Hook Form with Zod validation
+- **State**: React Context or Zustand for data management
+</PRD>

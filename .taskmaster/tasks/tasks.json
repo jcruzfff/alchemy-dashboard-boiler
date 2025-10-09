@@ -1,0 +1,156 @@
+{
+  "version": "1.0.0",
+  "projectName": "User Management System",
+  "description": "Frontend user management system for dashboard application",
+  "tags": {
+    "master": {
+      "name": "master",
+      "description": "Main development context",
+      "createdAt": "2024-01-15T10:00:00.000Z",
+      "tasks": [
+        {
+          "id": "1",
+          "title": "Create UserManagement Main Container",
+          "description": "Build the main UserManagement.tsx component that serves as the container for all user management functionality",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": [],
+          "details": "Create the main container component that includes the page header, statistics section, filters, and user table. This component should use the existing design system tokens and follow the established component patterns from SmartWalletsOverview.tsx.",
+          "testStrategy": "Verify component renders correctly with proper layout structure and design system integration",
+          "subtasks": []
+        },
+        {
+          "id": "2",
+          "title": "Build User Statistics Cards",
+          "description": "Create UserStats.tsx component with dashboard statistics cards showing user metrics",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": ["1"],
+          "details": "Build statistics cards displaying total users, active users, new users this month, and pending invites. Use the existing design system colors and spacing. Cards should be responsive and follow the established card patterns.",
+          "testStrategy": "Verify cards display correctly with proper styling and responsive behavior",
+          "subtasks": []
+        },
+        {
+          "id": "3",
+          "title": "Implement User Table Component",
+          "description": "Create UserTable.tsx with user data display, sorting, and selection capabilities",
+          "status": "pending",
+          "priority": "high",
+          "dependencies": ["1"],
+          "details": "Build a comprehensive table component that displays user information including avatar, name, email, role, status, and last active date. Include checkbox selection, sorting headers, and action buttons. Use existing design system for consistent styling.",
+          "testStrategy": "Test table functionality including sorting, selection, and responsive behavior",
+          "subtasks": []
+        },
+        {
+          "id": "4",
+          "title": "Create User Search and Filters",
+          "description": "Build UserFilters.tsx component with search input and filter dropdowns",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": ["1"],
+          "details": "Implement search functionality with real-time filtering and dropdown filters for role and status. Use the existing search icon and input styling patterns. Include clear filters functionality.",
+          "testStrategy": "Test search functionality and filter interactions work correctly",
+          "subtasks": []
+        },
+        {
+          "id": "5",
+          "title": "Build User Form Component",
+          "description": "Create reusable UserForm.tsx component for user creation and editing",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": ["1"],
+          "details": "Build a reusable form component with fields for name, email, role selection, and status. Include proper validation and error handling. Use React Hook Form with Zod validation and existing form styling patterns.",
+          "testStrategy": "Test form validation, error states, and submission handling",
+          "subtasks": []
+        },
+        {
+          "id": "6",
+          "title": "Implement Create User Modal",
+          "description": "Create CreateUserModal.tsx for user creation with form integration",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": ["5"],
+          "details": "Build modal component for creating new users using the UserForm component. Include proper modal styling, close functionality, and form submission handling. Use existing modal patterns and design system tokens.",
+          "testStrategy": "Test modal opening, form submission, and closing functionality",
+          "subtasks": []
+        },
+        {
+          "id": "7",
+          "title": "Implement Edit User Modal",
+          "description": "Create EditUserModal.tsx for user editing with pre-populated data",
+          "status": "pending",
+          "priority": "medium",
+          "dependencies": ["5"],
+          "details": "Build modal component for editing existing users with pre-populated form data. Include proper data loading, form updates, and submission handling. Reuse UserForm component with edit mode.",
+          "testStrategy": "Test modal with pre-populated data, form updates, and submission",
+          "subtasks": []
+        },
+        {
+          "id": "8",
+          "title": "Add Status and Role Badges",
+          "description": "Create StatusBadge.tsx and RoleBadge.tsx components for user status visualization",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": ["3"],
+          "details": "Build badge components for displaying user status (active, inactive, pending) and roles (admin, user, moderator). Use existing design system colors and follow established badge patterns.",
+          "testStrategy": "Verify badges display correctly with proper colors and styling",
+          "subtasks": []
+        },
+        {
+          "id": "9",
+          "title": "Implement Bulk Operations",
+          "description": "Add bulk selection and actions for multiple users",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": ["3"],
+          "details": "Implement bulk selection functionality with checkboxes, select all functionality, and bulk action buttons (activate, deactivate, delete). Include confirmation dialogs for destructive actions.",
+          "testStrategy": "Test bulk selection, actions, and confirmation dialogs",
+          "subtasks": []
+        },
+        {
+          "id": "10",
+          "title": "Add Loading States and Empty States",
+          "description": "Implement loading skeletons and empty state components",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": ["3", "4"],
+          "details": "Create loading skeleton components for the user table and cards. Add empty states for no users, no search results, and error states. Use existing animation patterns and design system styling.",
+          "testStrategy": "Test loading states and empty states display correctly",
+          "subtasks": []
+        },
+        {
+          "id": "11",
+          "title": "Integrate with Sidebar Navigation",
+          "description": "Add user management to the existing sidebar navigation",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": ["1"],
+          "details": "Add user management menu item to the existing sidebar navigation. Include proper icon, hover states, and navigation functionality. Follow existing sidebar patterns and styling.",
+          "testStrategy": "Test navigation integration and sidebar functionality",
+          "subtasks": []
+        },
+        {
+          "id": "12",
+          "title": "Polish and Optimize UI",
+          "description": "Final polish, animations, and performance optimizations",
+          "status": "pending",
+          "priority": "low",
+          "dependencies": ["1", "2", "3", "4", "5", "6", "7", "8"],
+          "details": "Add smooth transitions, hover effects, focus states, and performance optimizations. Ensure consistent spacing, typography, and color usage throughout all components. Test accessibility and keyboard navigation.",
+          "testStrategy": "Comprehensive testing of all interactions, animations, and accessibility",
+          "subtasks": []
+        }
+      ]
+    }
+  },
+  "currentTag": "master",
+  "lastSwitched": "2024-01-15T10:00:00.000Z",
+  "migrationNoticeShown": true
+}
+
+
+
+
+
+
+
