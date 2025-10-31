@@ -7,16 +7,17 @@ import { MainContent } from './MainContent';
 
 interface DashboardProps {
   className?: string;
+  onNavigateToAccount?: () => void;
 }
 
-export function Dashboard({ className = '' }: DashboardProps) {
+export function Dashboard({ className = '', onNavigateToAccount }: DashboardProps) {
   const [activePage, setActivePage] = React.useState<string>('Smart Wallets');
 
 
   return (
     <div className={`bg-neutral-50 relative size-full ${className}`}>
       {/* Top Navigation */}
-      <TopNav />
+      <TopNav onLogoClick={onNavigateToAccount} showAppBreadcrumb={true} />
       
       {/* Sidebar */}
       <Sidebar 

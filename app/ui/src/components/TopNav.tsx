@@ -5,25 +5,30 @@ import { Avatar } from '../atoms/Avatar';
 
 interface TopNavProps {
   className?: string;
+  onLogoClick?: () => void;
+  showAppBreadcrumb?: boolean;
 }
 
-export function TopNav({ className = '' }: TopNavProps) {
+export function TopNav({ className = '', onLogoClick, showAppBreadcrumb = false }: TopNavProps) {
   return (
-    <div className={`absolute bg-white box-border content-stretch flex flex-col items-center justify-center left-0 overflow-clip pl-4 pr-8 py-3 top-0 w-full h-14 border-b border-neutral-200 ${className}`}>
+    <div className={`absolute bg-white box-border content-stretch flex flex-col items-center justify-center left-0 overflow-clip pl-4 pr-8 py-3 top-0 w-full h-14 border-b border-neutral-200 z-50 ${className}`}>
       <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
         {/* Left Content */}
         <div className="content-stretch flex gap-2 items-center relative shrink-0">
           {/* App-level */}
           <div className="content-stretch flex gap-2 items-center relative shrink-0">
-            <div className="box-border content-stretch flex gap-2 h-8 items-center justify-center pl-0 pr-2.5 py-2 relative rounded-lg shrink-0">
+            <button 
+              onClick={onLogoClick}
+              className="box-border content-stretch flex gap-2 h-8 items-center justify-center pl-0 pr-2.5 py-2 relative rounded-lg shrink-0 cursor-pointer hover:bg-neutral-100 transition-colors"
+            >
               <div className="h-5 relative shrink-0 w-6">
-                <img alt="" className="block max-w-none size-full" src="/icons/Logo.svg" />
+                <img alt="Alchemy Logo" className="block max-w-none size-full" src="/icons/Logo.svg" />
               </div>
-            </div>
+            </button>
           </div>
 
-          {/* Button-TopNav */}
-            <div className="box-border content-stretch flex gap-2 h-8 items-center justify-center px-2.5 py-2 relative rounded-lg shrink-0">
+          {/* Team Info - Always shown */}
+          <div className="box-border content-stretch flex gap-2 h-8 items-center justify-center px-2.5 py-2 relative rounded-lg shrink-0">
             <div className="absolute border border-neutral-200 border-solid inset-0 pointer-events-none rounded-lg" />
             <div className="relative shrink-0 size-4">
               <img alt="" className="block max-w-none size-full" src="/icons/Users-bold.svg" />
@@ -41,24 +46,29 @@ export function TopNav({ className = '' }: TopNavProps) {
             </div>
           </div>
 
-          {/* CaretRight */}
-          <div className="relative shrink-0 size-3">
-            <img alt="CaretRight" className="block max-w-none size-full" src="/icons/CaretRight-bold.svg" />
-          </div>
+          {/* App Breadcrumb - Only shown at app level */}
+          {showAppBreadcrumb && (
+            <>
+              {/* CaretRight */}
+              <div className="relative shrink-0 size-3">
+                <img alt="CaretRight" className="block max-w-none size-full" src="/icons/CaretRight-bold.svg" />
+              </div>
 
-          {/* Button-TopNav */}
-            <div className="box-border content-stretch flex gap-2 h-8 items-center justify-center px-2.5 py-2 relative rounded-lg shrink-0">
-            <div className="absolute border border-neutral-200 border-solid inset-0 pointer-events-none rounded-lg" />
-            <div className="relative shrink-0 size-4">
-              <img alt="" className="block max-w-none size-full" src="/icons/Cube-bold.svg" />
-            </div>
-            <div className="font-medium-inter leading-[0] not-italic relative shrink-0 text-[14px] text-neutral-600 text-nowrap">
-              <p className="leading-[20px] whitespace-pre">My first app</p>
-            </div>
-            <div className="relative shrink-0 size-4">
-              <img alt="" className="block max-w-none size-full" src="/icons/CaretUpDown-bold.svg" />
-            </div>
-          </div>
+              {/* Button-TopNav */}
+              <div className="box-border content-stretch flex gap-2 h-8 items-center justify-center px-2.5 py-2 relative rounded-lg shrink-0">
+                <div className="absolute border border-neutral-200 border-solid inset-0 pointer-events-none rounded-lg" />
+                <div className="relative shrink-0 size-4">
+                  <img alt="" className="block max-w-none size-full" src="/icons/Cube-bold.svg" />
+                </div>
+                <div className="font-medium-inter leading-[0] not-italic relative shrink-0 text-[14px] text-neutral-600 text-nowrap">
+                  <p className="leading-[20px] whitespace-pre">My first app</p>
+                </div>
+                <div className="relative shrink-0 size-4">
+                  <img alt="" className="block max-w-none size-full" src="/icons/CaretUpDown-bold.svg" />
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Right Content */}
